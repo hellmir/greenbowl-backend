@@ -1,0 +1,63 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": [
+    "sin1"
+  ],
+  "services": {
+    "user": {
+      "root": ".",
+      "runtime": "container",
+      "entrypoint": "vercel-user.Dockerfile"
+    },
+    "recipe": {
+      "root": ".",
+      "runtime": "container",
+      "entrypoint": "vercel-recipe.Dockerfile"
+    },
+    "fridge": {
+      "root": ".",
+      "runtime": "container",
+      "entrypoint": "vercel-fridge.Dockerfile"
+    },
+    "recommendation": {
+      "root": ".",
+      "runtime": "container",
+      "entrypoint": "vercel-recommendation.Dockerfile"
+    },
+    "docs": {
+      "root": "vercel-docs"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/users/(.*)",
+      "destination": {
+        "service": "user"
+      }
+    },
+    {
+      "source": "/api/recipes/(.*)",
+      "destination": {
+        "service": "recipe"
+      }
+    },
+    {
+      "source": "/api/fridges/(.*)",
+      "destination": {
+        "service": "fridge"
+      }
+    },
+    {
+      "source": "/api/recommendations/(.*)",
+      "destination": {
+        "service": "recommendation"
+      }
+    },
+    {
+      "source": "/swagger-ui/(.*)",
+      "destination": {
+        "service": "docs"
+      }
+    }
+  ]
+}

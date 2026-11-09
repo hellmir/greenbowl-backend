@@ -37,8 +37,16 @@ dependencies {
     // security
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 
+    // springfox (서비스 모듈이 런타임에 제공)
+    compileOnly 'io.springfox:springfox-spring-web:3.0.0'
+
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.8'
+    testImplementation 'io.springfox:springfox-spring-web:3.0.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 bootJar {

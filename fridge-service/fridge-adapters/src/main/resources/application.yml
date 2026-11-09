@@ -27,6 +27,3 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
-eureka:
-  client:
-    enabled: false

@@ -1,7 +1,0 @@
-server:
-  port: 8081
-eureka:
-  client:
-    enabled: true
-    service-url:
-      defaultZone: http://greenbowl-backend_eureka_1:8761/eureka

@@ -47,6 +47,7 @@ llm:
     endpoint:
       streaming: ${LLM_SERVER_STREAMING_ENDPOINT}
       sse: /${LLM_SERVER_SSE_ENDPOINT}
+      json: ${LLM_SERVER_JSON_ENDPOINT}
   recipe:
     type: ${RECIPE_LLM_TYPE}
     template: ${RECIPE_LLM_TEMPLATE}
