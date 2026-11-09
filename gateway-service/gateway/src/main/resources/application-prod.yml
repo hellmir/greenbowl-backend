@@ -1,5 +1,0 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://greenbowl-backend_eureka_1:8761/eureka
-    enabled: true

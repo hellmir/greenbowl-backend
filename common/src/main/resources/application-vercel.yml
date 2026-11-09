@@ -1,0 +1,44 @@
+# Vercel 컨테이너 Function 전용 설정 (user·recipe·fridge·recommendation 공용)
+# 인스턴스가 요청이 올 때만 뜨고 약 35초 뒤 내려가므로 기동 시간과 DB 왕복을 줄인다
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+
+spring:
+  main:
+    lazy-initialization: true
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://${PGHOST_UNPOOLED}/${PGDATABASE}?sslmode=verify-full&sslfactory=org.postgresql.ssl.DefaultJavaSSLFactory
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          use_get_generated_keys: true
+
+management:
+  health:
+    db:
+      enabled: false
+
+logging:
+  config: classpath:logback-vercel.xml
+
+# 서비스 접두사는 context-path(이미지 ENV)가 맡는다. Swagger 경로에 다시 붙이지 않는다
+greenbowl:
+  swagger:
+    path-mapping: /

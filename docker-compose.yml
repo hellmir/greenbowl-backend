@@ -15,24 +15,6 @@ services:
       - POSTGRES_USER=postgresuser
       - POSTGRES_DB=greenbowl
 
-  eureka:
-    image: greenbowl-eureka:1.0.0
-    networks:
-      - greenbowl_network
-    ports:
-      - "8761:8761"
-
-  gateway:
-    image: greenbowl-gateway:1.0.0
-    networks:
-      - greenbowl_network
-    ports:
-      - "8000:8000"
-    depends_on:
-      - eureka
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-
   recommendation-adapters:
     image: greenbowl-recommendation-adapters:1.0.0
     networks:
@@ -41,7 +23,6 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-#      - eureka
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/greenbowl
       - SPRING_DATASOURCE_USERNAME=postgresuser
@@ -57,9 +38,7 @@ services:
       - "8081:8081"
     depends_on:
       - postgres
-      - eureka
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/greenbowl
       - SPRING_DATASOURCE_USERNAME=postgresuser
       - SPRING_DATASOURCE_PASSWORD=root
@@ -74,7 +53,6 @@ services:
       - "8082:8082"
     depends_on:
       - postgres
-#      - eureka
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/greenbowl
       - SPRING_DATASOURCE_USERNAME=postgresuser
@@ -90,7 +68,6 @@ services:
       - "8083:8083"
     depends_on:
       - postgres
-#      - eureka
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/greenbowl
       - SPRING_DATASOURCE_USERNAME=postgresuser

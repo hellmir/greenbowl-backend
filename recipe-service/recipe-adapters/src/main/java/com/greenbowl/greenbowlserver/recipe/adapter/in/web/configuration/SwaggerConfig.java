@@ -1,5 +1,6 @@
 package com.greenbowl.greenbowlserver.recipe.adapter.in.web.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.web.server.ManagementPortType;
@@ -33,6 +34,9 @@ import java.util.List;
 @EnableSwagger2
 public class
 SwaggerConfig {
+    @Value("${greenbowl.swagger.path-mapping:/api/recipes}")
+    private String pathMapping;
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -44,7 +48,7 @@ SwaggerConfig {
                 .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
-                .pathMapping("/api/recipes");
+                .pathMapping(pathMapping);
     }
 
     private SecurityContext securityContext() {

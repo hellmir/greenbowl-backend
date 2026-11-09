@@ -1,0 +1,15 @@
+.git
+.gradle
+.idea
+.vercel
+.env*
+build
+**/build
+**/src/test
+logs
+db
+k8s
+Dockerfile
+docker-compose.yml
+HELP.md
+README.md
